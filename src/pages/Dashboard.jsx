@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar_header from "../componets/Navbar";
-import {  Outlet } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
 function Dashboard() {
   return (
     <>
-      <Navbar_header />
-      <Outlet />
-    </>
+    
+    <Navbar_header />
+    <Outlet />
+  </>
+   
   );
 }
 
