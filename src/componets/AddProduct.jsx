@@ -1,18 +1,20 @@
-import React, { useState} from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 function AddProduct() {
- const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const { handlePageUpdate, setModalShow
+   } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const [error, setError] = useState(false);
-  const [image, setImage] = useState({ preview: '', data: '' })
+  const [image, setImage] = useState({ preview: "", data: "" });
   const [product, setProduct] = useState({
     productName: "",
     price: "",
     company: "",
     category: "",
-    
-    
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,21 +27,18 @@ function AddProduct() {
     const img = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
-    }
-    setImage(img)
-  
+    };
+    setImage(img);
   };
 
-
- 
   const sendProductData = async (e) => {
     e.preventDefault();
-  
+
     if (
       !product.productName ||
       !product.company ||
       !product.price ||
-      !product.category 
+      !product.category
     ) {
       setError(true);
       return false;
@@ -52,17 +51,20 @@ function AddProduct() {
     formData.append("category", product.category);
     const headers = {
       // 'Content-Type': 'application/json',
-      'x-auth':token
-    }
+      "x-auth": token,
+    };
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3007/api/product/add",formData,{headers}
-        
+        "http://127.0.0.1:3007/api/product/add",
+        formData,
+        { headers }
       );
       if (response) {
         // alert("Product added successfully");
-        setError(false)
-        navigate("/product")
+        setError(false);
+        navigate("/product");
+        setModalShow(false)
+        handlePageUpdate();
       } else {
         throw new Error("Error in adding the product");
       }
@@ -74,7 +76,7 @@ function AddProduct() {
       productName: "",
       price: "",
       company: "",
-      category: ""
+      category: "",
     });
   };
   return (
