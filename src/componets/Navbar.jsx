@@ -24,6 +24,7 @@ export default function Navbar_header() {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
+    
       
     </>
   )
