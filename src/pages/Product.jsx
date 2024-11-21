@@ -77,40 +77,43 @@ const Product = () => {
   };
   return (
     <>
-      <div className="container btn-container my-3 d-flex justify-content-between">
-        <input
-          className="border-none outline-none focus:border-none text-xs"
-          type="text"
-          placeholder="Search here"
-          value={searchTerm}
-          onChange={handleSearchTerm}
-        />
-        <Button variant="outline-primary" onClick={() => setModalShow(true)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-bag-plus-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z"
-            />
-          </svg>{" "}
-          Add Product{" "}
-        </Button>
-      </div>
-      <MyVerticallyCenteredModal
-        addproduct={<AddProduct />}
-        show={modalShow}
-        title={"Add New Product"}
-        onHide={() => setModalShow(false)}
+    <div className="container btn-container my-3 d-flex justify-content-between">
+      <input
+        className="border-none outline-none focus:border-none text-xs"
+        type="text"
+        placeholder="Search here"
+        value={searchTerm}
+        onChange={handleSearchTerm}
       />
-      <div className="container overflow-auto">
-        <table className="table table-bordered table-responsive table-image ">
-          <thead >
+      <Button variant="outline-primary" onClick={() => setModalShow(true)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-bag-plus-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z"
+          />
+        </svg>{" "}
+        Add Product{" "}
+      </Button>
+    </div>
+  
+    <MyVerticallyCenteredModal
+      addproduct={<AddProduct />}
+      show={modalShow}
+      title={"Add New Product"}
+      onHide={() => setModalShow(false)}
+    />
+  
+    <div className="container">
+      <div className="table-wrapper">
+        <table className="table table-bordered table-responsive table-image">
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Product Name</th>
@@ -121,18 +124,18 @@ const Product = () => {
               <th scope="col">More</th>
             </tr>
           </thead>
-
-          {productList
-            .filter((item) => {
-              return searchTerm.toLowerCase() === ""
-                ? item
-                : item.name.toLowerCase().includes(searchTerm);
-            })
-            .map((item, index) => (
-              <tbody key={index}>
-                <tr>
+  
+          <tbody>
+            {productList
+              .filter((item) => {
+                return searchTerm.toLowerCase() === ""
+                  ? item
+                  : item.name.toLowerCase().includes(searchTerm);
+              })
+              .map((item, index) => (
+                <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{item.name} </td>
+                  <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>{item.company}</td>
                   <td>{item.category}</td>
@@ -196,20 +199,24 @@ const Product = () => {
                     </div>
                   </td>
                 </tr>
-              </tbody>
-            ))}
+              ))}
+          </tbody>
         </table>
-        <MyVerticallyCenteredModal
-          addproduct={<UpdateProduct />}
-          show={updateModel}
-          title={"Update Product"}
-          onHide={() => setUpdateModel(false)}
-        />
-        {productList.length === 0 && (
-          <p className="text-center">No Result Found</p>
-        )}
       </div>
-    </>
+  
+      <MyVerticallyCenteredModal
+        addproduct={<UpdateProduct />}
+        show={updateModel}
+        title={"Update Product"}
+        onHide={() => setUpdateModel(false)}
+      />
+  
+      {productList.length === 0 && (
+        <p className="text-center">No Result Found</p>
+      )}
+    </div>
+  </>
+  
   );
 };
 

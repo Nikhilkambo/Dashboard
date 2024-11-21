@@ -9,6 +9,7 @@ export default function Input_Text(props) {
     placeholder={props.placeholder}
     onChange={props.onChange}
     className="form-control mt-1"
+    required={props.required}
   />
   )
 }
