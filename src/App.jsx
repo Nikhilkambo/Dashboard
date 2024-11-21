@@ -8,6 +8,8 @@ import CardsContainer from "./componets/CardsContainer";
 import Product from "./pages/Product";
 import AddProduct from "./componets/AddProduct";
 import { AuthProvider } from "./AuthContext";
+import ForgotPassword from "./componets/ForgetPassword";
+import ResetPassword from "./componets/ResetPassword";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             </Route>
           </Route>
           <Route path="/login" index element={<Auth />} />
+          <Route path="/password" element={<ForgotPassword/>}/>
+          <Route path="/reset-password/:token" element={<ResetPassword/>}/>
         </Routes>
       </BrowserRouter>
       </AuthProvider>

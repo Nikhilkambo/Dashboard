@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from "react";
 import Input_Text from "./Input_Text";
 import axios from "axios";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
 
 export default function Auth(props) {
@@ -178,7 +178,7 @@ export default function Auth(props) {
             </button>
           </div>
           <p className="text-center mt-2">
-            Forgot <a href="/password">password?</a>
+            Forgot <Link to="/password">password?</Link>
           </p>
         </div>
       </form>

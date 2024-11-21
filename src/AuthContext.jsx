@@ -70,6 +70,8 @@ const AuthProvider = ({ children }) => {
         updatePage,
         updateProduct,
         setUpdateProduct,
+        setUpdateModel,
+        updateModel
       }}
     >
       {children}
